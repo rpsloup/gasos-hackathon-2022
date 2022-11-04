@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { Pool } from 'pg';
 
+import languageRouter from './routes/languageRoutes';
 import technologyRouter from './routes/technologyRoutes';
 
 const app = express();
@@ -23,6 +24,7 @@ const port = process.env.port || DEFAULT_PORT;
 
 app.get('/', (_, res) => res.json('BE funguje.'));
 
+app.use(languageRouter);
 app.use(technologyRouter);
 
 app.listen(port, () => {
