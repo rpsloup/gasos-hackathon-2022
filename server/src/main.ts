@@ -3,6 +3,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { Pool } from 'pg';
 
+import technologyRouter from './routes/technologyRoutes';
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -21,15 +23,7 @@ const port = process.env.port || DEFAULT_PORT;
 
 app.get('/', (_, res) => res.json('BE funguje.'));
 
-app.get('/technology', async (_, res) => {
-  try {
-    const technologies = await pool.query('SELECT * FROM Technologies');
-    res.json(technologies?.rows ?? []);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json('Error!');
-  }
-})
+app.use(technologyRouter);
 
 app.listen(port, () => {
   console.log(`[Start] Listening on port ${port}...`);
