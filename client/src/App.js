@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import Icon from './components/Icon';
 
 import './style.css';
 
