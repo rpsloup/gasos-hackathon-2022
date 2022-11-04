@@ -39,6 +39,7 @@ studentRouter.post('/student', async (req, res) => {
       technologies,
       gdpr,
     } = req.body;
+    console.log(req.body);
 
     const newStudent = await pool.query('INSERT INTO Students (name, locality, school, end_year, languages, technologies, gdpr) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *', [
       name,
