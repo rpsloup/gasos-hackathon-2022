@@ -8,7 +8,7 @@ const languageRouter = Router();
 
 languageRouter.get('/language', async (_, res) => {
   try {
-    const languages = await pool.query('SELECT * FROM Languages');
+    const languages = await pool.query('SELECT * FROM Languages ORDER BY name');
     res.json(languages?.rows as Language[] ?? []);
   } catch (error) {
     console.log(error);
