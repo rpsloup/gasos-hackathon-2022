@@ -1,0 +1,9 @@
+INSERT INTO Technologies (name) VALUES ('C++');
+INSERT INTO Technologies (name) VALUES ('C#');
+INSERT INTO Technologies (name) VALUES ('Java');
+INSERT INTO Technologies (name) VALUES ('JS');
+INSERT INTO Technologies (name) VALUES ('PHP');
+INSERT INTO Technologies (name) VALUES ('Ruby');
+INSERT INTO Technologies (name) VALUES ('Rust');
+INSERT INTO Technologies (name) VALUES ('Python');
+INSERT INTO Technologies (name) VALUES ('C');
