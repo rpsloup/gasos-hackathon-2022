@@ -2,6 +2,10 @@ import { Router } from 'express';
 
 import { pool } from '../main';
 
+import type { Student } from '../../../typings/studentTypes';
+import type { Language } from '../../../typings/languageTypes';
+import type { Technology } from '../../../typings/technologyTypes';
+
 const studentRouter = Router();
 
 studentRouter.get('/student', async (_, res) => {
@@ -12,10 +16,10 @@ studentRouter.get('/student', async (_, res) => {
     if (!students?.rows) res.send([]);
     
     res.send(
-      students.rows.map(({ languages, technologies, ...restProperties }) => ({
+      (students.rows as Student[]).map(({ languages, technologies, ...restProperties }) => ({
         ...restProperties,
-        languages: fetchedLanguages?.rows && languages ? fetchedLanguages.rows.filter(language => languages.split(',').includes(String(language.language_id))) : [],
-        technologies: fetchedTechnologies?.rows && technologies ? fetchedTechnologies.rows.filter(technology => technologies.split(',').includes(String(technology.technology_id))) : [],
+        languages: fetchedLanguages?.rows && languages ? (fetchedLanguages.rows as Language[]).filter(language => languages.split(',').includes(String(language.language_id))) : [],
+        technologies: fetchedTechnologies?.rows && technologies ? (fetchedTechnologies.rows as Technology[]).filter(technology => technologies.split(',').includes(String(technology.technology_id))) : [],
       }))
     );
   } catch (error) {
