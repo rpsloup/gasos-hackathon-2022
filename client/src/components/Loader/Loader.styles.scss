@@ -1,0 +1,12 @@
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.loader {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #dedede;
+  border-bottom-color: #191919;
+  animation: 1s spin infinite linear;
+}
