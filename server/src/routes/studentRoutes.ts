@@ -28,4 +28,32 @@ studentRouter.get('/student', async (_, res) => {
   }
 });
 
+studentRouter.post('/student', async (req, res) => {
+  try {
+    const {
+      name,
+      locality,
+      school,
+      end_year,
+      languages,
+      technologies,
+      gdpr,
+    } = req.body;
+
+    const newStudent = await pool.query('INSERT INTO Students (name, locality, school, end_year, languages, technologies, gdpr) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *', [
+      name,
+      locality,
+      school,
+      end_year,
+      languages,
+      technologies,
+      gdpr,
+    ]);
+    res.json(newStudent?.rows[0] ?? null);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json('Error!');
+  }
+});
+
 export default studentRouter;
