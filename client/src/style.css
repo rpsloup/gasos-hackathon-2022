@@ -1,0 +1,80 @@
+:root {
+    font-family: 'ABeeZee', sans-serif;
+
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #005493;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    width: 400px;
+    border-radius: 20px;
+
+    padding: 10px 20px 0px 20px;
+
+    background-color: white;
+}
+
+.formHeader {
+    font-size: 34px;
+    margin-left: 40%;
+}
+
+form {
+    margin-left: 40px;
+}
+
+input[type="text"] {
+    height: 18px;
+    font-size: 14px;
+    outline: none;
+
+    border: none;
+    border-bottom: 2px solid #005493;
+}
+
+input[type="number"] {
+    height: 18px;
+    font-size: 14px;
+    outline: none;
+
+    border: none;
+    border-bottom: 2px solid #005493;
+}
+
+input[type="checkbox"] {
+    accent-color: #005493;
+}
+
+.submitButton {
+    width: 120px;
+    height: 40px;
+    border: none;
+    margin-left: 65%;
+    margin-bottom: 5%;
+    border-radius: 10px;
+
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.35);
+
+    color: white;
+    font-size: 17px;
+    background-color: #005493;
+}
+
+.submitButton:hover {
+    background-color: #023a64;
+}
+
+.submitButton:active {
+    scale: 97%;
+    background-color: #005493;
+}

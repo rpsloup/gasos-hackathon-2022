@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
+import './style.css';
+
 function App() {
   const [languages, setLanguages] = useState([]);
   const [activeLanguages, setActiveLanguages] = useState([]);
@@ -9,6 +11,7 @@ function App() {
 
   const firstNameRef = useRef();
   const lastNameRef = useRef();
+  const emailRef = useRef();
   const localityRef = useRef();
   const schoolRef = useRef();
   const endYearRef = useRef();
@@ -47,6 +50,7 @@ function App() {
       },
       body: JSON.stringify({
         name: `${firstNameRef.current.value} ${lastNameRef.current.value}`,
+        email: emailRef.current.value,
         locality: localityRef.current.value,
         school: schoolRef.current.value,
         end_year: endYearRef.current.value,
@@ -60,16 +64,19 @@ function App() {
 
   return (
     <div className="App">
+      <header className='formHeader'>Zápis</header>
       <form onSubmit={handleSubmit}>
-        <p>Jméno</p>
+        <p>Jméno:</p>
         <input type="text" name="fname" ref={firstNameRef} required  />
-        <p>Příjmení</p>
+        <p>Příjmení:</p>
         <input type="text" name="lname" ref={lastNameRef} required />
-        <p>Lokalita</p>
+        <p>Email:</p>
+        <input type="text" name="email" ref={emailRef} required />
+        <p>Lokalita:</p>
         <input type="text" name="locality" ref={localityRef} required />
-        <p>Škola</p>
+        <p>Škola:</p>
         <input type="text" name="school" ref={schoolRef} required />
-        <p>Rok ukončení</p>
+        <p>Rok ukončení:</p>
         <input type="number" ref={endYearRef} required/>
         <p>Jazyky:</p>
         {languages.map(language => (
@@ -87,7 +94,7 @@ function App() {
         ))}
         <p>Souhlasím s gdpr: <input type="checkbox" name='gdpr' ref={gdprRef}/></p>
         <br />
-        <button>Submit</button>
+        <button className='submitButton'>Odeslat</button>
       </form>
     </div>
   );
