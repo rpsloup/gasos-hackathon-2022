@@ -8,7 +8,7 @@ CREATE TABLE Students(
   locality VARCHAR(96) NOT NULL,
   school VARCHAR(64) NOT NULL,
   end_year INT NOT NULL,
-  languages VARCHAR(128),
+  languages VARCHAR(128) NOT NULL,
   technologies VARCHAR(128),
   gdpr BOOLEAN
 );

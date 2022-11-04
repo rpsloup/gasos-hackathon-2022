@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { Pool } from 'pg';
 
+import studentRouter from './routes/studentRoutes';
 import languageRouter from './routes/languageRoutes';
 import technologyRouter from './routes/technologyRoutes';
 
@@ -24,6 +25,7 @@ const port = process.env.port || DEFAULT_PORT;
 
 app.get('/', (_, res) => res.json('BE funguje.'));
 
+app.use(studentRouter);
 app.use(languageRouter);
 app.use(technologyRouter);
 
