@@ -25,6 +25,17 @@ languageRouter.post('/language', async (req, res) => {
     console.log(error);
     res.status(500).json('Error!');
   }
-})
+});
+
+languageRouter.delete('/language', async (req, res) => {
+  try {
+    const { id } = req.body;
+    const deletedLanguage = await pool.query('DELETE FROM Languages WHERE language_id = $1 RETURNING *', [id]);
+    res.json(deletedLanguage?.rows[0] ?? null);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json('Error!');
+  }
+});
 
 export default languageRouter;
