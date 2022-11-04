@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Loader from '../components/Loader';
 
 import '../styles/reset.scss';
+import '../styles/main.scss';
 
 const AdminPage = () => {
   const [students, setStudents] = useState([]);
