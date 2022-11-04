@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
+import '../style.css';
+
 const HomePage = () => {
   const [languages, setLanguages] = useState([]);
   const [activeLanguages, setActiveLanguages] = useState([]);
@@ -61,38 +63,40 @@ const HomePage = () => {
 
   return (
     <div className="App">
-      <header className='formHeader'>Zápis</header>
-      <form onSubmit={handleSubmit}>
-        <p>Jméno:</p>
-        <input type="text" name="fname" ref={firstNameRef} required  />
-        <p>Příjmení:</p>
-        <input type="text" name="lname" ref={lastNameRef} required />
-        <p>Email:</p>
-        <input type="text" name="email" ref={emailRef} required />
-        <p>Lokalita:</p>
-        <input type="text" name="locality" ref={localityRef} required />
-        <p>Škola:</p>
-        <input type="text" name="school" ref={schoolRef} required />
-        <p>Rok ukončení:</p>
-        <input type="number" ref={endYearRef} required/>
-        <p>Jazyky:</p>
-        {languages.map(language => (
-          <div key={language.language_id}>
-            <input type="checkbox" onChange={() => toggleLanguageActive(language.language_id)} />
-            <label>{language.name}</label>
-          </div>
-        ))}
-        <p>Technologie:</p>
-        {technologies.map(technology => (
-          <div key={technology.technology_id}>
-            <input type="checkbox" onChange={() => toggleTechnologyActive(technology.technology_id)} />
-            <label>{technology.name}</label>
-          </div>
-        ))}
-        <p>Souhlasím s gdpr: <input type="checkbox" name='gdpr' ref={gdprRef}/></p>
-        <br />
-        <button className='submitButton'>Odeslat</button>
-      </form>
+      <div className="app-content">
+        <header className='formHeader'>Zápis</header>
+        <form onSubmit={handleSubmit}>
+          <p>Jméno:</p>
+          <input type="text" name="fname" ref={firstNameRef} required  />
+          <p>Příjmení:</p>
+          <input type="text" name="lname" ref={lastNameRef} required />
+          <p>Email:</p>
+          <input type="text" name="email" ref={emailRef} required />
+          <p>Lokalita:</p>
+          <input type="text" name="locality" ref={localityRef} required />
+          <p>Škola:</p>
+          <input type="text" name="school" ref={schoolRef} required />
+          <p>Rok ukončení:</p>
+          <input type="number" ref={endYearRef} required/>
+          <p>Jazyky:</p>
+          {languages.map(language => (
+            <div key={language.language_id}>
+              <input type="checkbox" onChange={() => toggleLanguageActive(language.language_id)} />
+              <label>{language.name}</label>
+            </div>
+          ))}
+          <p>Technologie:</p>
+          {technologies.map(technology => (
+            <div key={technology.technology_id}>
+              <input type="checkbox" onChange={() => toggleTechnologyActive(technology.technology_id)} />
+              <label>{technology.name}</label>
+            </div>
+          ))}
+          <p>Souhlasím s gdpr: <input type="checkbox" name='gdpr' ref={gdprRef}/></p>
+          <br />
+          <button className='submitButton'>Odeslat</button>
+        </form>
+      </div>
     </div>
   );
 }

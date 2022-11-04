@@ -3,7 +3,7 @@
 
 }
 
-body {
+.App {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,7 +11,7 @@ body {
     background-color: #005493;
 }
 
-.App {
+.App .app-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
