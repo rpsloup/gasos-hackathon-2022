@@ -11,5 +11,5 @@ const port = process.env.port || DEFAULT_PORT;
 app.get('/', (_, res) => res.json('BE funguje.'));
 
 app.listen(port, () => {
-  console.log(`[Start] Listening on port ${port}`);
+  console.log(`[Start] Listening on port ${port}...`);
 });
