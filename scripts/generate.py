@@ -80,6 +80,7 @@ def main():
 	count_to_generate = get_count()
 	for i in range(count_to_generate):
 		name = generate_name().replace("'", "''")
+		email = name.lower().replace(' ', '.').replace("''", '') + '@domain.com'
 		location = generate_location()
 		school = generate_school()
 		end_year = generate_end_year()
@@ -88,7 +89,7 @@ def main():
 		gdpr = generate_gdpr()
 
 		output.write(
-			f'INSERT INTO Students (name, locality, school, end_year, languages, technologies, gdpr) VALUES (\'{name}\', \'{location}\', \'{school}\', {end_year}, \'{languages}\', \'{technologies}\', {gdpr});\n')
+			f'INSERT INTO Students (name, email, locality, school, end_year, languages, technologies, gdpr) VALUES (\'{name}\', \'{email}\', \'{location}\', \'{school}\', {end_year}, \'{languages}\', \'{technologies}\', {gdpr});\n')
 
 	print('\nGenerated.')
 
