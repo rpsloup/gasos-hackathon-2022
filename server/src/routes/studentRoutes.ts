@@ -57,4 +57,15 @@ studentRouter.post('/student', async (req, res) => {
   }
 });
 
+studentRouter.delete('/student', async (req, res) => {
+  try {
+    const { id } = req.body;
+    const deletedStudent = await pool.query('DELETE FROM Students WHERE student_id = $1 RETURNING *', [id]);
+    res.json(deletedStudent?.rows[0] ?? null);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json('Error!');
+  }
+});
+
 export default studentRouter;
