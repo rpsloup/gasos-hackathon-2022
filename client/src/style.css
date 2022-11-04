@@ -31,6 +31,7 @@ body {
 
 form {
     margin-left: 40px;
+    background-color: #ffffff;
 }
 
 input[type="text"] {
