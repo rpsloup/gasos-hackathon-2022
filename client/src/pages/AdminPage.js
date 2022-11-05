@@ -16,10 +16,6 @@ import '../styles/admin.scss';
 
 const AdminPage = () => {
   const [students, setStudents] = useState([]);
-  const [languages, setLanguages] = useState([]);
-  const [activeLanguages, setActiveLanguages] = useState([]);
-  const [technologies, setTechnologies] = useState([]);
-  const [activeTechnologies, setActiveTechnologies] = useState([]);
   const [studentsLoading, setStudentsLoading] = useState(true);
   const [editDialogShown, setEditDialogShown] = useState(false);
   const [currentStudent, setCurrentStudent] = useState(null);
@@ -64,18 +60,6 @@ const AdminPage = () => {
     window.location.reload();
   }
 
-  const toggleLanguageActive = (id) => {
-    activeLanguages.includes(id)
-      ? setActiveLanguages(activeLanguages.filter(language => language !== id))
-      : setActiveLanguages([...activeLanguages, id]);
-  }
-
-  const toggleTechnologyActive = (id) => {
-    activeTechnologies.includes(id)
-      ? setActiveTechnologies(activeTechnologies.filter(technology => technology !== id))
-      : setActiveTechnologies([...activeTechnologies, id]);
-  }
-
   useEffect(() => {
     fetch('http://192.168.43.201:3001/student')
       .then(res => res.json())
@@ -83,22 +67,7 @@ const AdminPage = () => {
         setStudents(data);
         setStudentsLoading(false);
       });
-
-    fetch('http://192.168.43.201:3001/language')
-      .then(res => res.json())
-      .then(data => setLanguages(data));
-
-    fetch('http://192.168.43.201:3001/technology')
-    .then(res => res.json())
-    .then(data => setTechnologies(data));
   }, []);
-
-  useEffect(() => {
-    currentStudent?.languages && setActiveLanguages(currentStudent.languages.map(language => language.language_id));
-  }, [currentStudent]);
-
-  console.log(activeLanguages);
-  console.log(languages);
 
   return (
     <>
