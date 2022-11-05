@@ -2,8 +2,22 @@ import Icon from '../Icon';
 
 import './StudentBox.styles.scss';
 
-const StudentBox = ({ student }) =>
-  (
+const StudentBox = ({ student }) => {
+  const handleDelete = (student) => {
+    if (window.confirm(`Are you sure you want to delete student ${student.name} (ID: ${student.student_id})?`)) {
+      fetch('http://192.168.43.201:3001/student', {
+        method: 'delete',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: student.student_id,
+        }),
+      });
+    }
+  }
+
+  return (
     <div className="student-box">
       <div>
         <Icon name="user" type="fas" />
@@ -22,8 +36,9 @@ const StudentBox = ({ student }) =>
         <span>{student.end_year}</span>
       </div>
       <button>Edit</button>
-      <button>Remove</button>
+      <button onClick={() => handleDelete(student)}>Remove</button>
     </div>
   );
+}
 
 export default StudentBox;
