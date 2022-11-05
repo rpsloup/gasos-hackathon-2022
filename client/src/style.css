@@ -211,19 +211,19 @@ section {
     background-color: #005493;
 }
 
-a {
+section a {
     height: 64px;
     width: 172px;
     margin-top: 72px;
     margin-left: 1200px;
 }
 
-form {
+section form {
     margin-top: 30px;
 }
 
-p,
-span {
+section p,
+section span {
     font-style: normal;
     font-weight: 400;
     font-size: 26px;
@@ -233,8 +233,8 @@ span {
     color: #191919;
 }
 
-input[type="text"],
-input[type="email"] {
+section input[type="text"],
+section input[type="email"] {
     display: flex;
     justify-content: end;
     align-items: flex-end;
@@ -252,7 +252,7 @@ input[type="email"] {
     border: 3px solid #005493;
 }
 
-input[type="number"] {
+section input[type="number"] {
     display: flex;
     justify-content: end;
     align-items: flex-end;
@@ -270,7 +270,7 @@ input[type="number"] {
     border: 3px solid #005493;
 }
 
-input[type="checkbox"] {
+section input[type="checkbox"] {
     position: relative;
     accent-color: #005493;
 
@@ -280,7 +280,7 @@ input[type="checkbox"] {
     border-radius: 20px;
 }
 
-label {
+section label {
     font-style: normal;
     font-weight: 400;
     font-size: 26px;
