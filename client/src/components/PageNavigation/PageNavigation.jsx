@@ -2,13 +2,19 @@ import { Link } from 'react-router-dom';
 
 import ContentWrapper from '../ContentWrapper';
 
+import './PageNavigation.styles.scss';
+
 const PageNavigation = () =>
   (
-    <nav>
+    <nav className="page-navigation">
       <ContentWrapper>
-        <h2>Page Navigation</h2>
-        <ul>
-          <li><Link to="/admin">Home</Link></li>
+        <div className="nav-logo" />
+        <ul className="nav-items">
+          <li className="nav-item"><Link to="/admin">Home</Link></li>
+          <li className="nav-item"><Link to="/admin/email">Emailing</Link></li>
+          <li className="nav-item"><Link to="/admin">Link</Link></li>
+          <li className="nav-item"><Link to="/admin">Link</Link></li>
+          <li className="nav-item"><Link to="/admin">Link</Link></li>
         </ul>
       </ContentWrapper>
     </nav>
