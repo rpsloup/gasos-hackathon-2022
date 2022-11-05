@@ -132,12 +132,12 @@ const HomePage = () => {
             <a href='https://www.certicon.cz/'><img className='certiconLogoNext after' src='../img/certicon-logo.png' /></a>
           </nav>
 
-          <header className='pageHeaderNext'>Zadej...</header>
+          <header className='pageHeaderNext'>Vypiš...</header>
           <form onSubmit={e => {
             e.preventDefault();
             nextSlide();
           }}>
-              <p>Lokalita:</p>
+              <p>Bydliště:</p>
                 <input
                   type="text"
                   name="locality"
@@ -176,7 +176,7 @@ const HomePage = () => {
               e.preventDefault();
               nextSlide();
             }}>
-            <p>Jazyky:</p>
+            <p className='languageHeader'>Jazyky:</p>
             <div className='boxLanguage'>
               {languages.map(language => (
                 <div key={language.language_id}>
@@ -201,7 +201,7 @@ const HomePage = () => {
                 <a href='https://www.certicon.cz/'><img className='certiconLogoNext after' src='../img/certicon-logo.png' /></a>
               </nav>
 
-              <header className='pageHeaderNext'>Vyber...</header>
+              <header className='pageHeaderNext'>Zvol...</header>
               <form onSubmit={e => {
                 e.preventDefault();
                 nextSlide();
@@ -233,7 +233,7 @@ const HomePage = () => {
                 e.preventDefault();
                 nextSlide();
               }}>
-                <span>Souhlasím s gdpr:</span>
+                <span className='gdprHeader'>Souhlasím s GDPR:</span>
                 <input
                   className='gdprChceckbox'
                   type="checkbox"
