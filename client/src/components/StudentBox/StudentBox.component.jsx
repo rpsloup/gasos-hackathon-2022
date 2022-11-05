@@ -1,8 +1,8 @@
-import './StudentRow.styles.scss';
+import './StudentBox.styles.scss';
 
-const StudentRow = ({ student }) =>
+const StudentBox = ({ student }) =>
   (
-    <div className="student-row">
+    <div className="student-box">
       <p>{student.name}</p>
       <p>{student.locality}</p>
       <p>{student.school}</p>
@@ -10,4 +10,4 @@ const StudentRow = ({ student }) =>
     </div>
   );
 
-export default StudentRow;
+export default StudentBox;

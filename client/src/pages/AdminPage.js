@@ -4,11 +4,10 @@ import { Link } from 'react-router-dom';
 import PageNavigation from '../components/PageNavigation';
 import ContentWrapper from '../components/ContentWrapper';
 import Loader from '../components/Loader';
-import StudentRow from '../components/StudentRow';
+import StudentBox from '../components/StudentBox';
 
 import '../styles/reset.scss';
 import '../styles/main.scss';
-import '../styles/admin.scss';
 
 const AdminPage = () => {
   const [students, setStudents] = useState([]);
@@ -32,16 +31,10 @@ const AdminPage = () => {
           <li><Link to="/admin/email">Zaslat emaily</Link></li>
         </ul>
         <h2>Studenti</h2>
-        <div className="students-header">
-          <p><b>Jméno</b></p>
-          <p><b>Lokalita</b></p>
-          <p><b>Škola</b></p>
-          <p><b>Rok ukončení studia</b></p>
-        </div>
         {studentsLoading ? <Loader /> : null}
         {students && students.length > 0 ? students.map(
           student => (
-            <StudentRow key={student.student_id} student={student} />
+            <StudentBox key={student.student_id} student={student} />
           )
         ) : null}
       </ContentWrapper>
