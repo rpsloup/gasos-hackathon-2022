@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import Loader from '../components/Loader';
 
@@ -21,6 +22,9 @@ const AdminPage = () => {
   return (
     <>
       <h1>Administrace</h1>
+      <ul>
+        <li><Link to="/admin/email">Zaslat emaily</Link></li>
+      </ul>
       <h2>Studenti</h2>
       {studentsLoading ? <Loader /> : null}
       {students && students.length > 0 ? students.map(

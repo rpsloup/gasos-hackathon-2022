@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { Pool } from 'pg';
+import nodemailer from 'nodemailer';
 
 import studentRouter from './routes/studentRoutes';
 import languageRouter from './routes/languageRoutes';
@@ -28,6 +29,31 @@ app.get('/', (_, res) => res.json('BE funguje.'));
 app.use(studentRouter);
 app.use(languageRouter);
 app.use(technologyRouter);
+
+const mailTransporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.MAIL_USER ?? '',
+    pass: process.env.MAIL_PASS ?? '',
+  },
+});
+
+const mailOptions = {
+  from: process.env.MAIL_USER ?? '',
+  to: 'robin.patrik.sloup@proton.me',
+  subject: 'Sussy!',
+  text: 'Yup, this is sussy.',
+};
+
+app.get('/mail/all', (req, res) => {
+  mailTransporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+});
 
 app.listen(port, () => {
   console.log(`[Start] Listening on port ${port}...`);
