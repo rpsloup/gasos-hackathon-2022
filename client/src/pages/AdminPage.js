@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 import PageNavigation from '../components/PageNavigation';
 import ContentWrapper from '../components/ContentWrapper';
 import Loader from '../components/Loader';
+import StudentRow from '../components/StudentRow';
 
 import '../styles/reset.scss';
 import '../styles/main.scss';
+import '../styles/admin.scss';
 
 const AdminPage = () => {
   const [students, setStudents] = useState([]);
@@ -30,28 +32,16 @@ const AdminPage = () => {
           <li><Link to="/admin/email">Zaslat emaily</Link></li>
         </ul>
         <h2>Studenti</h2>
+        <div className="students-header">
+          <p><b>Jméno</b></p>
+          <p><b>Lokalita</b></p>
+          <p><b>Škola</b></p>
+          <p><b>Rok ukončení studia</b></p>
+        </div>
         {studentsLoading ? <Loader /> : null}
         {students && students.length > 0 ? students.map(
           student => (
-            <div key={student.student_id}>
-              <h3>{student.name}</h3>
-              <p>Lokalita: {student.locality}</p>
-              <p>Škola: {student.school}</p>
-              <p>Rok ukočení studia: {student.end_year}</p>
-              <p>Souhlasil(a) s GDPR: {student.gdpr ? 'Ano' : 'Ne'}</p>
-              <h3>Programovací jazyky</h3>
-              <ul>
-                {student.languages.map(language => (
-                  <li key={language.language_id}>{language.name}</li>
-                ))}
-              </ul>
-              <h3>Technologie</h3>
-              <ul>
-                {student.technologies.map(technology => (
-                  <li key={technology.technology_id}>{technology.name}</li>
-                ))}
-              </ul>
-            </div>
+            <StudentRow key={student.student_id} student={student} />
           )
         ) : null}
       </ContentWrapper>
