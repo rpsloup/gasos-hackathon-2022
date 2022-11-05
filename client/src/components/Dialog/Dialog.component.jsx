@@ -2,10 +2,10 @@ import Button from '../Button';
 
 import './Dialog.styles.scss';
 
-const Dialog = ({ title, shown, children }) =>
+const Dialog = ({ title, shown, closeHandler, children }) =>
   (
-    <div className="dialog" display={{
-      display: shown ? 'block' : 'none',
+    <div className="dialog" style={{
+      display: shown ? 'flex' : 'none',
     }}>
       <div className="dark-effect" />
       <div className="dialog-content">
@@ -17,7 +17,7 @@ const Dialog = ({ title, shown, children }) =>
         </div>
         <div className="dialog-footer">
           <Button text="Zavřít" />
-          <Button text="Pokračovat" />
+          <Button handler={closeHandler ?? undefined} text="Pokračovat" variant="primary" />
         </div>
       </div>
     </div>

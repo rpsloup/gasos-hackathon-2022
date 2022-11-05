@@ -1,8 +1,8 @@
 import './Button.styles.scss';
 
-const Button = ({ text, handler }) =>
+const Button = ({ text, variant, handler }) =>
   (
-    <button className="button" onClick={handler ?? undefined}>{text}</button>
+    <button className={`button ${variant ? `button--${variant}` : ''}`} onClick={handler ?? undefined}>{text}</button>
   );
 
 export default Button;

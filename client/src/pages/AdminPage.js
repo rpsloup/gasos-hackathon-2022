@@ -17,7 +17,12 @@ import '../styles/admin.scss';
 const AdminPage = () => {
   const [students, setStudents] = useState([]);
   const [studentsLoading, setStudentsLoading] = useState(true);
+  const [editDialogShown, setEditDialogShown] = useState(false);
   const navigate = useNavigate();
+
+  const handleEdit = () => {
+    setEditDialogShown(true);
+  }
 
   useEffect(() => {
     fetch('http://192.168.43.201:3001/student')
@@ -30,8 +35,13 @@ const AdminPage = () => {
 
   return (
     <>
-      <Dialog title="Úprava záznamu studenta">
-        Sus.
+      <Dialog title="Úprava záznamu studenta" closeHandler={() => setEditDialogShown(false)} shown={editDialogShown}>
+        <form onSubmit={e => e.preventDefault()}>
+          <input type="text" name="name" />
+          <input type="text" name="locality" />
+          <input type="text" name="school" />
+          <input type="text" name="endyear" />
+        </form>
       </Dialog>
       <PageNavigation />
       <ContentWrapper>
@@ -46,7 +56,7 @@ const AdminPage = () => {
         <Collection>
           {students && students.length > 0 ? students.map(
             student => (
-              <StudentBox key={student.student_id} student={student} />
+              <StudentBox key={student.student_id} student={student} editHandler={handleEdit} />
             )
           ) : null}
         </Collection>

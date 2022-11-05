@@ -3,7 +3,7 @@ import Button from '../Button';
 
 import './StudentBox.styles.scss';
 
-const StudentBox = ({ student }) => {
+const StudentBox = ({ student, editHandler }) => {
   const handleDelete = (student) => {
     if (window.confirm(`Are you sure you want to delete student ${student.name} (ID: ${student.student_id})?`)) {
       fetch('http://192.168.43.201:3001/student', {
@@ -42,9 +42,9 @@ const StudentBox = ({ student }) => {
         <span>{student.end_year}</span>
       </div>
       <div className="buttons">
-        <Button text="Upravit" />
+        <Button text="Upravit" handler={() => editHandler()} />
         <Button text="Odebrat" handler={() => handleDelete(student)} />
-        <Button text="Zaslat email" handler={() => handleSendMail()} />
+        <Button text="Zaslat email" handler={() => handleSendMail()} variant="primary" />
       </div>
     </div>
   );

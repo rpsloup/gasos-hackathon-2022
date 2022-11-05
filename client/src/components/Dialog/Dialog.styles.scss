@@ -2,7 +2,6 @@
   position: fixed;
   top: 0;
   left: 0;
-  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -20,6 +19,7 @@
   }
 
   .dialog-content {
+    position: relative;
     width: calc(100% - 4.8rem);
     max-width: 48rem;
     background-color: #fafafa;
