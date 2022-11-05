@@ -1,8 +1,8 @@
 import './Card.styles.scss';
 
-const Card = ({ icon, text }) =>
+const Card = ({ icon, text, handler }) =>
   (
-    <div className="card">
+    <div className="card" onClick={handler ?? undefined}>
       {icon}
       <span className="card-text">{text}</span>
     </div>

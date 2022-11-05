@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import PageNavigation from '../components/PageNavigation';
 import ContentWrapper from '../components/ContentWrapper';
@@ -15,6 +15,7 @@ import '../styles/main.scss';
 const AdminPage = () => {
   const [students, setStudents] = useState([]);
   const [studentsLoading, setStudentsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('http://192.168.43.201:3001/student')
@@ -33,12 +34,10 @@ const AdminPage = () => {
         <ul>
           <li><Link to="/admin/email">Zaslat emaily</Link></li>
         </ul>
-        <Collection>
-          <Card icon={<Icon name="paper-plane" type="fas" />} text="Card Text" />
-          <Card icon={<Icon name="paper-plane" type="fas" />} text="Card Text" />
-          <Card icon={<Icon name="paper-plane" type="fas" />} text="Card Text" />
-          <Card icon={<Icon name="paper-plane" type="fas" />} text="Card Text" />
-          <Card icon={<Icon name="paper-plane" type="fas" />} text="Card Text" />
+        <Collection columnSize="18rem">
+          <Card icon={<Icon name="paper-plane" type="fas" />} text="Rozeslat emaily" handler={() => navigate('/admin/email')} />
+          <Card icon={<Icon name="paper-plane" type="fas" />} text="Import studentů" handler={() => navigate('/admin/import')} />
+          <Card icon={<Icon name="paper-plane" type="fas" />} text="Export studentů" handler={() => navigate('/admin/export')} />
         </Collection>
         <h2>Studenti</h2>
         {studentsLoading ? <Loader /> : null}

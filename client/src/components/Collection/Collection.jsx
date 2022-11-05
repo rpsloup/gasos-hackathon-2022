@@ -1,8 +1,10 @@
 import './Collection.styles.scss';
 
-const Collection = ({ children }) =>
+const Collection = ({ columnSize, children }) =>
   (
-    <div className="collection">
+    <div className="collection" style={columnSize ? {
+      gridTemplateColumns: `repeat(auto-fill, minmax(${columnSize}, 1fr))`,
+    } : undefined}>
       {children}
     </div>
   );
