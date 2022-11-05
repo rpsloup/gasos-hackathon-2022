@@ -8,9 +8,11 @@ import type { Technology } from '../../../typings/technologyTypes';
 
 const studentRouter = Router();
 
-studentRouter.get('/student', async (_, res) => {
+studentRouter.get('/student', async (req, res) => {
   try {
-    const students = await pool.query('SELECT * FROM Students');
+    const { year } = req.query;
+
+    const students = await pool.query(`SELECT * FROM Students ${year ? `WHERE end_year = ${year}` : ''} ORDER BY student_id`);
     const fetchedLanguages = await pool.query('SELECT * FROM Languages');
     const fetchedTechnologies = await pool.query('SELECT * FROM Technologies');
     if (!students?.rows) res.send([]);
@@ -22,6 +24,16 @@ studentRouter.get('/student', async (_, res) => {
         technologies: fetchedTechnologies?.rows && technologies ? (fetchedTechnologies.rows as Technology[]).filter(technology => technologies.split(',').includes(String(technology.technology_id))) : [],
       }))
     );
+  } catch (error) {
+    console.log(error);
+    res.status(500).json('Error!');
+  }
+});
+
+studentRouter.get('/student_raw', async (_, res) => {
+  try {
+    const students = await pool.query('SELECT * FROM Students');
+    res.json(students?.rows as Technology[] ?? []);
   } catch (error) {
     console.log(error);
     res.status(500).json('Error!');
@@ -53,6 +65,38 @@ studentRouter.post('/student', async (req, res) => {
       gdpr,
     ]);
     res.json(newStudent?.rows[0] ?? null);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json('Error!');
+  }
+});
+studentRouter.put('/student', async (req, res) => {
+  try {
+    const {
+      student_id,
+      name,
+      email,
+      locality,
+      school,
+      end_year,
+      languages,
+      technologies,
+      gdpr,
+    } = req.body;
+    console.log(req.body);
+
+    const updatedStudent = await pool.query('UPDATE Students SET name = $1, email = $2, locality = $3, school = $4, end_year = $5, languages = $6, technologies = $7, gdpr = $8 WHERE student_id = $9 RETURNING *', [
+      name,
+      email,
+      locality,
+      school,
+      end_year,
+      languages,
+      technologies,
+      gdpr,
+      student_id,
+    ]);
+    res.json(updatedStudent?.rows[0] ?? null);
   } catch (error) {
     console.log(error);
     res.status(500).json('Error!');

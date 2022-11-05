@@ -2,8 +2,23 @@
   padding: 2.4rem;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
+  h3 {
+    margin-bottom: 1.2rem;
+  }
+
   div {
     display: flex;
     gap: 1.2rem;
+
+    .icon {
+      color: #005493;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin-top: 1.2rem;
   }
 }

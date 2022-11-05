@@ -1,13 +1,34 @@
 import Icon from '../Icon';
+import Button from '../Button';
 
 import './StudentBox.styles.scss';
 
-const StudentBox = ({ student }) =>
-  (
+const StudentBox = ({ student, editHandler }) => {
+  const handleDelete = (student) => {
+    if (window.confirm(`Are you sure you want to delete student ${student.name} (ID: ${student.student_id})?`)) {
+      fetch('http://192.168.43.201:3001/student', {
+        method: 'delete',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: student.student_id,
+        }),
+      });
+      window.location.reload();
+    }
+  }
+
+  const handleSendMail = () => {
+    fetch('http://192.168.43.201:3001/mail/all');
+  }
+
+  return (
     <div className="student-box">
+      <h3>{student.name}</h3>
       <div>
-        <Icon name="user" type="fas" />
-        <span>{student.name}</span>
+        <Icon name="envelope" type="fas" />
+        <span>{student.email}</span>
       </div>
       <div>
         <Icon name="location-dot" type="fas" />
@@ -21,7 +42,13 @@ const StudentBox = ({ student }) =>
         <Icon name="graduation-cap" type="fas" />
         <span>{student.end_year}</span>
       </div>
+      <div className="buttons">
+        <Button text="Upravit" handler={() => editHandler(student)} />
+        <Button text="Odebrat" handler={() => handleDelete(student)} />
+        <Button text="Zaslat email" handler={() => handleSendMail()} variant="primary" />
+      </div>
     </div>
   );
+}
 
 export default StudentBox;

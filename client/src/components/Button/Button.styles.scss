@@ -1,0 +1,13 @@
+.button {
+  padding: 0.6rem 1.2rem;
+  background-color: #dedede;
+  color: #191919;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+
+  &--primary {
+    background-color: #005493;
+    color: #fafafa;
+  }
+}
