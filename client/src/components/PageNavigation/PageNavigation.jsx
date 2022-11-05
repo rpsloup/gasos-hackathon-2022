@@ -11,6 +11,11 @@ const PageNavigation = () =>
         <Link to="/admin">
           <img src="/img/certicon-logo.png" alt="Certicon Logo" className="nav-logo" />
         </Link>
+        <div className="nav-hider">
+          <div className="bar"></div>
+          <div className="bar"></div>
+          <div className="bar"></div>
+        </div>
         <ul className="nav-items">
           <li className="nav-item"><Link to="/admin">Domů</Link></li>
           <li className="nav-item"><Link to="/admin/email">Emailing</Link></li>
