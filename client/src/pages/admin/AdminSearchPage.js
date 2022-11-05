@@ -43,7 +43,6 @@ const AdminSearchPage = () => {
           <input type="number" ref={endYearRef} required />
           <button>Hledat</button>
         </form>
-        <h2>Výsledky</h2>
         {!studentsLoading ? <Collection>
           {students && students.length > 0 ? students.map(
             student => (

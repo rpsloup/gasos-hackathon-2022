@@ -1,4 +1,5 @@
 import Icon from '../Icon';
+import Button from '../Button';
 
 import './StudentBox.styles.scss';
 
@@ -19,10 +20,7 @@ const StudentBox = ({ student }) => {
 
   return (
     <div className="student-box">
-      <div>
-        <Icon name="user" type="fas" />
-        <span>{student.name}</span>
-      </div>
+      <h3>{student.name}</h3>
       <div>
         <Icon name="envelope" type="fas" />
         <span>{student.email}</span>
@@ -39,9 +37,11 @@ const StudentBox = ({ student }) => {
         <Icon name="graduation-cap" type="fas" />
         <span>{student.end_year}</span>
       </div>
-      <button>Upravit</button>
-      <button onClick={() => handleDelete(student)}>Odebrat</button>
-      <button>Zaslat email</button>
+      <div className="buttons">
+        <Button text="Upravit" />
+        <Button text="Odebrat" handler={() => handleDelete(student)} />
+        <Button text="Zaslat email" />
+      </div>
     </div>
   );
 }
