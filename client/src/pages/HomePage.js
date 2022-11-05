@@ -86,75 +86,6 @@ const HomePage = () => {
           <section className='sec-2' style={{
             display: slideIndex === 1 ? 'flex' : 'none'
           }}>
-            <p>Jméno:</p>
-              <input
-                type="text"
-                name="fname"
-                onChange={e => setFirstName(e.target.value)}
-                required 
-              />
-              <p>Příjmení:</p>
-                <input
-                  type="text"
-                  name="lname"
-                  onChange={e => setLastName(e.target.value)}
-                  required
-                />
-              <p>Email:</p>
-                <input
-                  type="email"
-                  name="email"
-                  onChange={e => setEmail(e.target.value)}
-                  required
-                /><br />
-              <button className='submitButtonNext'><Icon type="fas" name="arrow-right" /></button>
-          </form>
-
-        </section>
-
-        <section className='sec-3' style={{
-          visibility: slideIndex === 2 ? 'visible' : 'hidden',
-          zIndex: 3,
-        }}>
-          <nav className='navbarNext'>
-            <button className='backButton' onClick={previousSlide}><Icon type="fas" name="arrow-left" /></button>
-            <a href='https://www.certicon.cz/'><img className='certiconLogoNext after' src='../img/certicon-logo.png' /></a>
-          </nav>
-
-          <header className='pageHeaderNext'>Vypiš...</header>
-          <form onSubmit={e => {
-            e.preventDefault();
-            nextSlide();
-          }}>
-              <p>Bydliště:</p>
-                <input
-                  type="text"
-                  name="locality"
-                  onChange={e => setLocality(e.target.value)}
-                  required 
-                />
-              <p>Škola:</p>
-                <input
-                  type="text"
-                  name="school"
-                  onChange={e => setSchool(e.target.value)}
-                  required 
-                />
-              <p>Rok ukončení:</p>
-                <input
-                  type="number"
-                  onChange={e => setEndYear(e.target.value)}
-                  required
-                /><br />
-              <button className='submitButtonNext'><Icon type="fas" name="arrow-right" /></button>
-          </form>
-
-        </section>
-
-        <section className='sec-4' style={{
-          visibility: slideIndex === 3 ? 'visible' : 'hidden',
-          zIndex: 4,
-        }}>
             <nav className='navbarNext'>
               <button className='backButton' onClick={previousSlide}><Icon type="fas" name="arrow-left" /></button>
               <a href='https://www.certicon.cz/'><img className='certiconLogoNext after' src='../img/certicon-logo.png' alt='Certicon Logo' /></a>
@@ -169,22 +100,6 @@ const HomePage = () => {
               <p>Email:</p>
                 <input type="text" name="email" ref={emailRef} required /><br />
                 <button className='submitButtonNext' onClick={nextSlide}><Icon type="fas" name="arrow-right" /></button>
-            <header className='pageHeaderNext'>Vyber...</header>
-            <form onSubmit={e => {
-              e.preventDefault();
-              nextSlide();
-            }}>
-            <p className='languageHeader'>Jazyky:</p>
-            <div className='boxLanguage'>
-              {languages.map(language => (
-                <div key={language.language_id}>
-                  <input type="checkbox" onChange={() => toggleLanguageActive(language.language_id)} />
-                  <label>{language.name}</label>
-                  
-                </div>
-              ))}
-              </div><br />
-                <button className='submitButtonNext'><Icon type="fas" name="arrow-right" /></button>
             </form>
 
           </section>
@@ -207,21 +122,7 @@ const HomePage = () => {
                   <input type="number" ref={endYearRef} required/><br />
                 <button className='submitButtonNext' onClick={nextSlide}><Icon type="fas" name="arrow-right" /></button>
             </form>
-              <header className='pageHeaderNext'>Zvol...</header>
-              <form onSubmit={e => {
-                e.preventDefault();
-                nextSlide();
-              }}>
-              <p>Technologie:</p>
-              <div className='boxTechnology'>
-                {technologies.map(technology => (
-                  <div key={technology.technology_id}>
-                    <input type="checkbox" onChange={() => toggleTechnologyActive(technology.technology_id)} />
-                    <label>{technology.name}</label>
-                  </div>
-                ))}</div><br />
-                  <button className='submitButtonNext'><Icon type="fas" name="arrow-right" /></button>
-              </form>
+
           </section>
 
             <section className='sec-4' style={{
@@ -245,19 +146,6 @@ const HomePage = () => {
                 ))}
                 </div><br />
                   <button className='submitButtonNext' onClick={nextSlide}><Icon type="fas" name="arrow-right" /></button>
-              <form onSubmit={e => {
-                e.preventDefault();
-                nextSlide();
-              }}>
-                <span className='gdprHeader'>Souhlasím s GDPR:</span>
-                <input
-                  className='gdprChceckbox'
-                  type="checkbox"
-                  name='gdpr'
-                  onChange={e => setGdpr(e.target.checked)}
-                />
-                <br />
-                  <button className='submitButtonNext'><Icon type="fas" name="arrow-right" /></button>
               </form>
 
             </section>
