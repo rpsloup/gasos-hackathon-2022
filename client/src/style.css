@@ -1,5 +1,5 @@
 :root {
-    font-family: 'ABeeZee', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 
 }
 
@@ -8,74 +8,323 @@
     align-items: center;
     justify-content: center;
 
-    background-color: #005493;
 }
 
 .App .app-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.sec-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+}
+
+.navbarMain {
+    position: absolute;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 100px;
+    width: 100vw;
+
+    top: 0;
+}
+
+.certiconLogoMain {
+    height: 64px;
+    width: 172px;
     
-    width: 400px;
-    border-radius: 20px;
-
-    padding: 10px 20px 0px 20px;
-
-    background-color: white;
 }
 
-.formHeader {
-    font-size: 34px;
-    margin-left: 40%;
+.pageHeaderMain {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 72px;
+    cursor: default;
+
+    line-height: 98px;
+
+    color: #191919;
 }
 
-form {
-    margin-left: 40px;
-    background-color: #ffffff;
+.pageInfoMain {
+    width: 938px;
+    margin-top: 125px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    cursor: default;
+
+    line-height: 35px;
+    text-align: center;
+
+    color: rgba(25, 25, 25, 0.85);
 }
 
-input[type="text"] {
-    height: 18px;
-    font-size: 14px;
-    outline: none;
-
+.submitButtonMain {
+    height: 84px;
+    width: 84px;
+    margin-top: 125px;
+    border-radius: 50%;
     border: none;
-    border-bottom: 2px solid #005493;
-}
-
-input[type="number"] {
-    height: 18px;
-    font-size: 14px;
-    outline: none;
-
-    border: none;
-    border-bottom: 2px solid #005493;
-}
-
-input[type="checkbox"] {
-    accent-color: #005493;
-}
-
-.submitButton {
-    width: 120px;
-    height: 40px;
-    border: none;
-    margin-left: 65%;
-    margin-bottom: 5%;
-    border-radius: 10px;
-
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
 
     color: white;
-    font-size: 17px;
+    font-size: 30px;
     background-color: #005493;
+
+    box-shadow: 0px 0px 32px 16px rgba(0, 0, 0, 0.1);
 }
 
-.submitButton:hover {
+.submitButtonMain:hover {
+    scale: 102%;
     background-color: #023a64;
 }
 
-.submitButton:active {
+.submitButtonMain:active {
     scale: 97%;
     background-color: #005493;
 }
+
+
+
+.sec-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+}
+
+.sec-3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+}
+
+.sec-4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+}
+
+.sec-5 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+}
+
+.sec-6 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+}
+
+.sec-7 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+}
+
+.backButton {
+    height: 84px;
+    width: 84px;
+    margin-top: 125px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+
+    color: rgba(25, 25, 25, 0.3);
+    font-size: 30px;
+    background-color: white;
+}
+
+.navbarNext {
+    position: absolute;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    height: 100px;
+    width: 100vw;
+
+    top: 0;
+}
+
+.certiconLogoNext {
+    height: 64px;
+    width: 172px;
+}
+
+.pageHeaderNext {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 72px;
+    cursor: default;
+
+    line-height: 98px;
+
+    color: #191919;
+}
+
+.submitButtonNext {
+    height: 84px;
+    width: 84px;
+    margin-top: 50px;
+    margin-left: 40%;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+
+    color: white;
+    font-size: 30px;
+    background-color: #005493;
+
+    box-shadow: 0px 0px 32px 16px rgba(0, 0, 0, 0.1);
+}
+
+.submitButtonNext:hover {
+    scale: 102%;
+    background-color: #023a64;
+}
+
+.submitButtonNext:active {
+    scale: 97%;
+    background-color: #005493;
+}
+
+a {
+    height: 64px;
+    width: 172px;
+    margin-top: 72px;
+    margin-left: 1200px;
+}
+
+form {
+    margin-top: 30px;
+}
+
+p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 35px;
+    margin-top: 20px;
+
+    color: #191919;
+}
+
+input[type="text"] {
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+
+    width: 350px;
+    height: 54px;
+
+    margin-top: 10px;
+    padding-left: 5px;
+    padding-top: 20px;
+
+    font-size: 22px;
+
+    background: #FFFFFF;
+    border: 3px solid #005493;
+}
+
+input[type="number"] {
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+
+    width: 350px;
+    height: 54px;
+
+    margin-top: 10px;
+    padding-left: 5px;
+    padding-top: 20px;
+
+    font-size: 22px;
+
+    background: #FFFFFF;
+    border: 3px solid #005493;
+}
+
+input[type="checkbox"] {
+    position: relative;
+    accent-color: #005493;
+
+    height: 25px;
+    width: 25px;
+    
+    border-radius: 20px;
+}
+
+label {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    margin-left: 20px;
+    line-height: 35px;
+
+    color: rgba(25, 25, 25, 0.85);
+}
+
+.gdprChceckbox {
+    margin-left: 40px;
+}
+
+.pageInfoNext {
+    width: 600px;
+    margin-top: 100px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    cursor: default;
+
+    line-height: 35px;
+    text-align: center;
+
+    color: rgba(25, 25, 25, 0.85);
+}
+
+.boxLanguage {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 30px;
+}
+
+.boxTechnology {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 30px;
+} 
