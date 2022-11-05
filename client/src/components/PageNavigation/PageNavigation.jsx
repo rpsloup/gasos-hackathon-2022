@@ -8,7 +8,9 @@ const PageNavigation = () =>
   (
     <nav className="page-navigation">
       <ContentWrapper>
-        <div className="nav-logo" />
+        <Link to="/admin">
+          <img src="/img/certicon-logo.png" alt="Certicon Logo" className="nav-logo" />
+        </Link>
         <ul className="nav-items">
           <li className="nav-item"><Link to="/admin">Home</Link></li>
           <li className="nav-item"><Link to="/admin/email">Emailing</Link></li>

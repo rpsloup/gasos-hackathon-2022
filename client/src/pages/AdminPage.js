@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import PageNavigation from '../components/PageNavigation';
 import ContentWrapper from '../components/ContentWrapper';

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Icon from "../components/Icon";
 
 import '../style.css';
@@ -11,13 +11,13 @@ const HomePage = () => {
   const [technologies, setTechnologies] = useState([]);
   const [activeTechnologies, setActiveTechnologies] = useState([]);
 
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [locality, setLocality] = useState('');
-  const [school, setSchool] = useState('');
-  const [endYear, setEndYear] = useState('');
-  const [gdpr, setGdpr] = useState(false);
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
+  const emailRef = useRef();
+  const localityRef = useRef();
+  const schoolRef = useRef();
+  const endYearRef = useRef();
+  const gdprRef = useRef();
 
   const toggleLanguageActive = (id) => {
     activeLanguages.includes(id)
@@ -49,20 +49,21 @@ const HomePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('a');
     fetch("http://192.168.43.201:3001/student", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: `${firstName} ${lastName}`,
-        email,
-        locality,
-        school,
-        end_year: endYear,
+        name: `${firstNameRef.current.value} ${lastNameRef.current.value}`,
+        email: emailRef.current.value,
+        locality: localityRef.current.value,
+        school: schoolRef.current.value,
+        end_year: endYearRef.current.value,
         languages: activeLanguages.join(','),
         technologies: activeTechnologies.join(','),
-        gdpr,
+        gdpr: gdprRef.current.checked,
       })
     });
   }
@@ -70,194 +71,172 @@ const HomePage = () => {
   return (
     <div className="App">
       <div className="app-content">
-        <section className='sec-1' style={{
-          visibility: slideIndex === 0 ? 'visible' : 'hidden',
-          zIndex: 1,
-        }}>
-          <nav className='navbarMain'>
-            <a href='https://www.certicon.cz/'><img className='certiconLogoMain' src='../img/certicon-logo.png' /></a>
-          </nav>
+        {/*  
+        <header className='formHeader'>Zápis</header>
+        <form onSubmit={handleSubmit}>
+          <p>Jméno:</p>
+          <input type="text" name="fname" ref={firstNameRef} required  />
+          <p>Příjmení:</p>
+          <input type="text" name="lname" ref={lastNameRef} required />
+          <p>Email:</p>
+          <input type="text" name="email" ref={emailRef} required />
+          <p>Lokalita:</p>
+          <input type="text" name="locality" ref={localityRef} required />
+          <p>Škola:</p>
+          <input type="text" name="school" ref={schoolRef} required />
+          <p>Rok ukončení:</p>
+          <input type="number" ref={endYearRef} required/>
+          <p>Jazyky:</p>
+          {languages.map(language => (
+            <div key={language.language_id}>
+              <input type="checkbox" onChange={() => toggleLanguageActive(language.language_id)} />
+              <label>{language.name}</label>
+            </div>
+          ))}
+          <p>Technologie:</p>
+          {technologies.map(technology => (
+            <div key={technology.technology_id}>
+              <input type="checkbox" onChange={() => toggleTechnologyActive(technology.technology_id)} />
+              <label>{technology.name}</label>
+            </div>
+          ))}
+          <p>Souhlasím s gdpr: <input type="checkbox" name='gdpr' ref={gdprRef}/></p>
+          <br />
+          <button className='submitButton'>Odeslat</button>
+        </form>
+        */}
 
-          <header className='pageHeaderMain'>Nevíš kam po škole?</header>
-          <p className='pageInfoMain'>Vyplň tento krátký formulář a zajisti si stabilní pozici, přátelské prostředí a dobrý plat během pár kliknutí. Zapíšeme se ti na seznam uchazečů, a můžeš získávat informace o akcích, projektech nebo pracovní nabídku.</p>
-          <button className='submitButtonMain' onClick={nextSlide}><Icon type="fas" name="arrow-right" /></button>
-        </section>
-
-        <section className='sec-2' style={{
-          visibility: slideIndex === 1 ? 'visible' : 'hidden',
-          zIndex: 2,
-        }}>
-          <nav className='navbarNext'>
-            <button className='backButton' onClick={previousSlide}><Icon type="fas" name="arrow-left" /></button>
-            <a href='https://www.certicon.cz/'><img className='certiconLogoNext after' src='../img/certicon-logo.png' /></a>
-          </nav>
-
-          <header className='pageHeaderNext'>Zadej...</header>
-          <form onSubmit={e => {
-            e.preventDefault();
-            nextSlide();
+          <section className='sec-1' style={{
+            display: slideIndex === 0 ? 'flex' : 'none'
           }}>
-            <p>Jméno:</p>
-              <input
-                type="text"
-                name="fname"
-                onChange={e => setFirstName(e.target.value)}
-                required 
-              />
-              <p>Příjmení:</p>
-                <input
-                  type="text"
-                  name="lname"
-                  onChange={e => setLastName(e.target.value)}
-                  required
-                />
-              <p>Email:</p>
-                <input
-                  type="email"
-                  name="email"
-                  onChange={e => setEmail(e.target.value)}
-                  required
-                /><br />
-              <button className='submitButtonNext'><Icon type="fas" name="arrow-right" /></button>
-          </form>
-
-        </section>
-
-        <section className='sec-3' style={{
-          visibility: slideIndex === 2 ? 'visible' : 'hidden',
-          zIndex: 3,
-        }}>
-          <nav className='navbarNext'>
-            <button className='backButton' onClick={previousSlide}><Icon type="fas" name="arrow-left" /></button>
-            <a href='https://www.certicon.cz/'><img className='certiconLogoNext after' src='../img/certicon-logo.png' /></a>
-          </nav>
-
-          <header className='pageHeaderNext'>Zadej...</header>
-          <form onSubmit={e => {
-            e.preventDefault();
-            nextSlide();
-          }}>
-              <p>Lokalita:</p>
-                <input
-                  type="text"
-                  name="locality"
-                  onChange={e => setLocality(e.target.value)}
-                  required 
-                />
-              <p>Škola:</p>
-                <input
-                  type="text"
-                  name="school"
-                  onChange={e => setSchool(e.target.value)}
-                  required 
-                />
-              <p>Rok ukončení:</p>
-                <input
-                  type="number"
-                  onChange={e => setEndYear(e.target.value)}
-                  required
-                /><br />
-              <button className='submitButtonNext'><Icon type="fas" name="arrow-right" /></button>
-          </form>
-
-        </section>
-
-        <section className='sec-4' style={{
-          visibility: slideIndex === 3 ? 'visible' : 'hidden',
-          zIndex: 4,
-        }}>
-            <nav className='navbarNext'>
-              <button className='backButton' onClick={previousSlide}><Icon type="fas" name="arrow-left" /></button>
-              <a href='https://www.certicon.cz/'><img className='certiconLogoNext after' src='../img/certicon-logo.png' /></a>
+            <nav className='navbarMain'>
+              <a href='https://www.certicon.cz/'><img className='certiconLogoMain' src='../img/certicon-logo.png' alt='Certicon Logo' /></a>
             </nav>
 
-            <header className='pageHeaderNext'>Vyber...</header>
-            <form onSubmit={e => {
-              e.preventDefault();
-              nextSlide();
-            }}>
-            <p>Jazyky:</p>
-            <div className='boxLanguage'>
-              {languages.map(language => (
-                <div key={language.language_id}>
-                  <input type="checkbox" onChange={() => toggleLanguageActive(language.language_id)} />
-                  <label>{language.name}</label>
-                  
-                </div>
-              ))}
-              </div><br />
-                <button className='submitButtonNext'><Icon type="fas" name="arrow-right" /></button>
+            <header className='pageHeaderMain'>Nevíš kam po škole?</header>
+            <p className='pageInfoMain'>Vyplň tento krátký formulář a zajisti si stabilní pozici, přátelské prostředí a dobrý plat během pár kliknutí. Zapíšeme se ti na seznam uchazečů, a můžeš získávat informace o akcích, projektech nebo pracovní nabídku.</p>
+            <button className='submitButtonMain' onClick={nextSlide}><Icon type="fas" name="arrow-right" /></button>
+          </section>
+
+          <section className='sec-2' style={{
+            display: slideIndex === 1 ? 'flex' : 'none'
+          }}>
+            <nav className='navbarNext'>
+              <button className='backButton' onClick={previousSlide}><Icon type="fas" name="arrow-left" /></button>
+              <a href='https://www.certicon.cz/'><img className='certiconLogoNext after' src='../img/certicon-logo.png' alt='Certicon Logo' /></a>
+            </nav>
+
+            <header className='pageHeaderNext'>Zadej...</header>
+            <form onSubmit={e => e.preventDefault()}>
+              <p>Jméno:</p>
+                <input type="text" name="fname" ref={firstNameRef} required  />
+              <p>Příjmení:</p>
+                <input type="text" name="lname" ref={lastNameRef} required />
+              <p>Email:</p>
+                <input type="text" name="email" ref={emailRef} required /><br />
+                <button className='submitButtonNext' onClick={nextSlide}><Icon type="fas" name="arrow-right" /></button>
             </form>
 
           </section>
-        
 
-          <section className='sec-5' style={{
-            visibility: slideIndex === 4 ? 'visible' : 'hidden',
-            zIndex: 5,
+          <section className='sec-3'style={{
+            display: slideIndex === 2 ? 'flex' : 'none'
+          }}>
+            <nav className='navbarNext'>
+              <button className='backButton' onClick={previousSlide}><Icon type="fas" name="arrow-left" /></button>
+              <a href='https://www.certicon.cz/'><img className='certiconLogoNext after' src='../img/certicon-logo.png' alt='Certicon Logo' /></a>
+            </nav>
+
+            <header className='pageHeaderNext'>Zadej...</header>
+            <form onSubmit={e => e.preventDefault()}>
+                <p>Lokalita:</p>
+                  <input type="text" name="locality" ref={localityRef} required />
+                <p>Škola:</p>
+                  <input type="text" name="school" ref={schoolRef} required />
+                <p>Rok ukončení:</p>
+                  <input type="number" ref={endYearRef} required/><br />
+                <button className='submitButtonNext' onClick={nextSlide}><Icon type="fas" name="arrow-right" /></button>
+            </form>
+
+          </section>
+
+            <section className='sec-4' style={{
+            display: slideIndex === 3 ? 'flex' : 'none'
           }}>
               <nav className='navbarNext'>
                 <button className='backButton' onClick={previousSlide}><Icon type="fas" name="arrow-left" /></button>
-                <a href='https://www.certicon.cz/'><img className='certiconLogoNext after' src='../img/certicon-logo.png' /></a>
+                <a href='https://www.certicon.cz/'><img className='certiconLogoNext after' src='../img/certicon-logo.png' alt='Certicon Logo' /></a>
               </nav>
 
               <header className='pageHeaderNext'>Vyber...</header>
-              <form onSubmit={e => {
-                e.preventDefault();
-                nextSlide();
-              }}>
-              <p>Technologie:</p>
-              <div className='boxTechnology'>
-                {technologies.map(technology => (
-                  <div key={technology.technology_id}>
-                    <input type="checkbox" onChange={() => toggleTechnologyActive(technology.technology_id)} />
-                    <label>{technology.name}</label>
+              <form onSubmit={e => e.preventDefault()}>
+              <p>Jazyky:</p>
+              <div className='boxLanguage'>
+                {languages.map(language => (
+                  <div key={language.language_id}>
+                    <input type="checkbox" onChange={() => toggleLanguageActive(language.language_id)} />
+                    <label>{language.name}</label>
+                    
                   </div>
-                ))}</div><br />
-                  <button className='submitButtonNext'><Icon type="fas" name="arrow-right" /></button>
+                ))}
+                </div><br />
+                  <button className='submitButtonNext' onClick={nextSlide}><Icon type="fas" name="arrow-right" /></button>
               </form>
 
             </section>
+          
 
-            <section className='sec-6' style={{
-              visibility: slideIndex === 5 ? 'visible' : 'hidden',
-              zIndex: 6,
-            }}>
-              <nav className='navbarNext'>
-                <button className='backButton' onClick={previousSlide}><Icon type="fas" name="arrow-left" /></button>
-                <a href='https://www.certicon.cz/'><img className='certiconLogoNext after' src='../img/certicon-logo.png' /></a>
-              </nav>
+              <section className='sec-5' style={{
+            display: slideIndex === 4? 'flex' : 'none'
+          }}>
+                <nav className='navbarNext'>
+                  <button className='backButton' onClick={previousSlide}><Icon type="fas" name="arrow-left" /></button>
+                  <a href='https://www.certicon.cz/'><img className='certiconLogoNext after' src='../img/certicon-logo.png' alt='Certicon Logo' /></a>
+                </nav>
 
-              <header className='pageHeaderNext'>Vyber...</header>
-              <form onSubmit={e => {
-                e.preventDefault();
-                nextSlide();
-              }}>
-                <span>Souhlasím s gdpr:</span>
-                <input
-                  className='gdprChceckbox'
-                  type="checkbox"
-                  name='gdpr'
-                  onChange={e => setGdpr(e.target.checked)}
-                />
-                <br />
-                  <button className='submitButtonNext'><Icon type="fas" name="arrow-right" /></button>
-              </form>
+                <header className='pageHeaderNext'>Vyber...</header>
+                <form onSubmit={e => e.preventDefault()}>
+                <p>Technologie:</p>
+                <div className='boxTechnology'>
+                  {technologies.map(technology => (
+                    <div key={technology.technology_id}>
+                      <input type="checkbox" onChange={() => toggleTechnologyActive(technology.technology_id)} />
+                      <label>{technology.name}</label>
+                    </div>
+                  ))}</div><br />
+                    <button className='submitButtonNext' onClick={nextSlide}><Icon type="fas" name="arrow-right" /></button>
+                </form>
 
-            </section>
+              </section>
 
-            <section className='sec-7' style={{
-              visibility: slideIndex === 6 ? 'visible' : 'hidden',
-              zIndex: 7,
-            }}>
-              <nav className='navbarMain'>
-                <a href='https://www.certicon.cz/'><img className='certiconLogoMain' src='../img/certicon-logo.png' /></a>
-              </nav>
+              <section className='sec-6' style={{
+            display: slideIndex === 5 ? 'flex' : 'none'
+          }}>
+                <nav className='navbarNext'>
+                  <button className='backButton' onClick={previousSlide}><Icon type="fas" name="arrow-left" /></button>
+                  <a href='https://www.certicon.cz/'><img className='certiconLogoNext after' src='../img/certicon-logo.png' alt='Certicon Logo' /></a>
+                </nav>
 
-              <header className='pageHeaderNext'>Děkujeme.</header>    
-              <p className='pageInfoNext'>O akcích nebo pracovních nabídkách tě budeme kontaktovat emailem.</p>            
+                <header className='pageHeaderNext'>Vyber...</header>
+                <form onSubmit={handleSubmit}>
+                <p>Souhlasím s gdpr: <input className='gdprChceckbox' type="checkbox" name='gdpr' ref={gdprRef}/></p>
+                  <br />
+                    <button className='submitButtonNext' onClick={nextSlide}><Icon type="fas" name="arrow-right" /></button>
+                </form>
 
-            </section>
+              </section>
+
+              <section className='sec-7' style={{
+            display: slideIndex === 6 ? 'flex' : 'none'
+          }}>
+                <nav className='navbarMain'>
+                  <a href='https://www.certicon.cz/'><img className='certiconLogoMain' src='../img/certicon-logo.png' alt='Certicon Logo' /></a>
+                </nav>
+
+                <header className='pageHeaderNext'>Děkujeme.</header>    
+                <p className='pageInfoNext'>O akcích nebo pracovních nabídkách tě budeme kontaktovat emailem.</p>            
+
+              </section>
            
       </div>
     </div>
