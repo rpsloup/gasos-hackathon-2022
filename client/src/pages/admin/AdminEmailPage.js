@@ -1,4 +1,5 @@
 import PageNavigation from '../../components/PageNavigation';
+import ContentWrapper from '../../components/ContentWrapper';
 
 const AdminEmailPage = () => {
   const handleSendMailToAll = () => {
@@ -8,8 +9,10 @@ const AdminEmailPage = () => {
   return (
     <>
       <PageNavigation />
-      <h1>Zasílání emailu</h1>
-      <button onClick={handleSendMailToAll}>Zaslat email všem studentům</button>
+      <ContentWrapper>
+        <h1>Zasílání emailu</h1>
+        <button onClick={handleSendMailToAll}>Zaslat email všem studentům</button>
+      </ContentWrapper>
     </>
   );
 }
