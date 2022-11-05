@@ -122,24 +122,6 @@ const AdminPage = () => {
           <input type="text" name="school" ref={newSchoolRef} defaultValue={currentStudent?.school ?? ''} />
           <label htmlFor="endyear">Ukončení studia</label>
           <input type="text" name="endyear" ref={newEndYearRef} defaultValue={currentStudent?.end_year ?? ''} />
-          {languages.map(language => (
-            <div key={language.language_id}>
-              <input
-                type="checkbox"
-                defaultChecked={activeLanguages.includes(language.language_id)}
-                onChange={() => toggleLanguageActive(language.language_id)}
-              />
-              <label>{language.name}</label>
-            </div>
-          ))}
-          {technologies.map(technology => {
-            
-            return(
-            <div key={technology.technology_id}>
-              <input type="checkbox" onChange={() => toggleTechnologyActive(technology.technology_id)} />
-              <label>{technology.name}</label>
-            </div>
-          )})}
         </form>
       </Dialog>
       <PageNavigation />
