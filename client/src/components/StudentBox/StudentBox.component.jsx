@@ -15,6 +15,7 @@ const StudentBox = ({ student, editHandler }) => {
           id: student.student_id,
         }),
       });
+      window.location.reload();
     }
   }
 
@@ -42,7 +43,7 @@ const StudentBox = ({ student, editHandler }) => {
         <span>{student.end_year}</span>
       </div>
       <div className="buttons">
-        <Button text="Upravit" handler={() => editHandler()} />
+        <Button text="Upravit" handler={() => editHandler(student)} />
         <Button text="Odebrat" handler={() => handleDelete(student)} />
         <Button text="Zaslat email" handler={() => handleSendMail()} variant="primary" />
       </div>

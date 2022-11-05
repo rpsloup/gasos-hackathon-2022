@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import PageNavigation from '../components/PageNavigation';
@@ -18,10 +18,58 @@ const AdminPage = () => {
   const [students, setStudents] = useState([]);
   const [studentsLoading, setStudentsLoading] = useState(true);
   const [editDialogShown, setEditDialogShown] = useState(false);
+  const [currentStudent, setCurrentStudent] = useState(null);
+  const newStudentNameRef = useRef(null);
+  const newEmailRef = useRef(null);
+  const newLocalityRef = useRef(null);
+  const newSchoolRef = useRef(null);
+  const newEndYearRef = useRef(null);
   const navigate = useNavigate();
 
-  const handleEdit = () => {
+  const handleOpenEdit = student => {
     setEditDialogShown(true);
+    setCurrentStudent(student);
+    console.log(newStudentNameRef.current.value);
+
+    if (
+      !newStudentNameRef?.current?.value ||
+      !newEmailRef.current?.value ||
+      !newLocalityRef.current?.value ||
+      !newSchoolRef.current?.value ||
+      !newEndYearRef.current?.value
+    ) return;
+
+    newStudentNameRef.current.value = student.name;
+    console.log(newStudentNameRef.current.value);
+  }
+
+  const handleEdit = () => {
+    if (
+      !newStudentNameRef?.current?.value ||
+      !newEmailRef.current?.value ||
+      !newLocalityRef.current?.value ||
+      !newSchoolRef.current?.value ||
+      !newEndYearRef.current?.value
+    ) return;
+
+    fetch('http://192.168.43.201:3001/student', {
+      method: 'put',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        student_id: currentStudent.student_id,
+        name: `${newStudentNameRef.current.value}`,
+        email: newEmailRef.current.value,
+        locality: newLocalityRef.current.value,
+        school: newSchoolRef.current.value,
+        end_year: newEndYearRef.current.value,
+        languages: '1,2,3',
+        technologies: '3,1',
+        gdpr: true,
+      })
+    });
+    window.location.reload();
   }
 
   useEffect(() => {
@@ -35,12 +83,21 @@ const AdminPage = () => {
 
   return (
     <>
-      <Dialog title="Úprava záznamu studenta" closeHandler={() => setEditDialogShown(false)} shown={editDialogShown}>
+      <Dialog
+        title="Úprava záznamu studenta"
+        closeHandler={() => {
+          setEditDialogShown(false);
+          setCurrentStudent(null);
+        }}
+        shown={editDialogShown}
+        confirmHandler={() => handleEdit()}
+      >
         <form onSubmit={e => e.preventDefault()}>
-          <input type="text" name="name" />
-          <input type="text" name="locality" />
-          <input type="text" name="school" />
-          <input type="text" name="endyear" />
+          <input type="text" name="name" ref={newStudentNameRef} defaultValue={currentStudent?.name ?? ''} />
+          <input type="text" name="email" ref={newEmailRef} defaultValue={currentStudent?.email ?? ''}  />
+          <input type="text" name="locality" ref={newLocalityRef} defaultValue={currentStudent?.locality ?? ''}  />
+          <input type="text" name="school" ref={newSchoolRef} defaultValue={currentStudent?.school ?? ''}  />
+          <input type="text" name="endyear" ref={newEndYearRef} defaultValue={currentStudent?.end_year ?? ''}  />
         </form>
       </Dialog>
       <PageNavigation />
@@ -56,7 +113,7 @@ const AdminPage = () => {
         <Collection>
           {students && students.length > 0 ? students.map(
             student => (
-              <StudentBox key={student.student_id} student={student} editHandler={handleEdit} />
+              <StudentBox key={student.student_id} student={student} editHandler={handleOpenEdit} />
             )
           ) : null}
         </Collection>

@@ -70,6 +70,38 @@ studentRouter.post('/student', async (req, res) => {
     res.status(500).json('Error!');
   }
 });
+studentRouter.put('/student', async (req, res) => {
+  try {
+    const {
+      student_id,
+      name,
+      email,
+      locality,
+      school,
+      end_year,
+      languages,
+      technologies,
+      gdpr,
+    } = req.body;
+    console.log(req.body);
+
+    const updatedStudent = await pool.query('UPDATE Students SET name = $1, email = $2, locality = $3, school = $4, end_year = $5, languages = $6, technologies = $7, gdpr = $8 WHERE student_id = $9 RETURNING *', [
+      name,
+      email,
+      locality,
+      school,
+      end_year,
+      languages,
+      technologies,
+      gdpr,
+      student_id,
+    ]);
+    res.json(updatedStudent?.rows[0] ?? null);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json('Error!');
+  }
+});
 
 studentRouter.delete('/student', async (req, res) => {
   try {

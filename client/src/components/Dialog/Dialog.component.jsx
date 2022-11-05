@@ -2,7 +2,7 @@ import Button from '../Button';
 
 import './Dialog.styles.scss';
 
-const Dialog = ({ title, shown, closeHandler, children }) =>
+const Dialog = ({ title, shown, closeHandler, confirmHandler, children }) =>
   (
     <div className="dialog" style={{
       display: shown ? 'flex' : 'none',
@@ -17,7 +17,7 @@ const Dialog = ({ title, shown, closeHandler, children }) =>
         </div>
         <div className="dialog-footer">
           <Button handler={closeHandler ? () => closeHandler() : undefined} text="Zavřít" />
-          <Button text="Pokračovat" variant="primary" />
+          <Button handler={confirmHandler ? () => confirmHandler() : undefined} text="Pokračovat" variant="primary" />
         </div>
       </div>
     </div>

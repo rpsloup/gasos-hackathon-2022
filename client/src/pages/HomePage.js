@@ -184,7 +184,7 @@ const HomePage = () => {
 
                 <header className='pageHeaderNext'>Vyber...</header>
                 <form onSubmit={handleSubmit}>
-                <p>Souhlasím s gdpr: <input className='gdprChceckbox' type="checkbox" name='gdpr' ref={gdprRef}/></p>
+                <p>Souhlasím s GDPR: <input className='gdprChceckbox' type="checkbox" name='gdpr' ref={gdprRef}/></p>
                   <br />
                     <button className='submitButtonNext' onClick={nextSlide}><Icon type="fas" name="arrow-right" /></button>
                 </form>
