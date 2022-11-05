@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import PageNavigation from '../components/PageNavigation';
 import Loader from '../components/Loader';
 
 import '../styles/reset.scss';
@@ -21,6 +22,7 @@ const AdminPage = () => {
 
   return (
     <>
+      <PageNavigation />
       <h1>Administrace</h1>
       <ul>
         <li><Link to="/admin/email">Zaslat emaily</Link></li>
