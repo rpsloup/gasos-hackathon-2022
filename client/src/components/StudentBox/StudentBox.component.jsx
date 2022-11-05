@@ -21,6 +21,8 @@ const StudentBox = ({ student }) =>
         <Icon name="graduation-cap" type="fas" />
         <span>{student.end_year}</span>
       </div>
+      <button>Edit</button>
+      <button>Remove</button>
     </div>
   );
 

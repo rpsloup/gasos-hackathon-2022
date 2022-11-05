@@ -31,9 +31,6 @@ const AdminPage = () => {
       <PageNavigation />
       <ContentWrapper>
         <h1>Administrace</h1>
-        <ul>
-          <li><Link to="/admin/email">Zaslat emaily</Link></li>
-        </ul>
         <Collection columnSize="18rem">
           <Card icon={<Icon name="paper-plane" type="fas" />} text="Rozeslat emaily" handler={() => navigate('/admin/email')} />
           <Card icon={<Icon name="paper-plane" type="fas" />} text="Import studentů" handler={() => navigate('/admin/import')} />
