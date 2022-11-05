@@ -24,6 +24,10 @@ const StudentBox = ({ student }) => {
         <span>{student.name}</span>
       </div>
       <div>
+        <Icon name="envelope" type="fas" />
+        <span>{student.email}</span>
+      </div>
+      <div>
         <Icon name="location-dot" type="fas" />
         <span>{student.locality}</span>
       </div>

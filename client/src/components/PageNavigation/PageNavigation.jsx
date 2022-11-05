@@ -14,9 +14,8 @@ const PageNavigation = () =>
         <ul className="nav-items">
           <li className="nav-item"><Link to="/admin">Home</Link></li>
           <li className="nav-item"><Link to="/admin/email">Emailing</Link></li>
-          <li className="nav-item"><Link to="/admin">Link</Link></li>
-          <li className="nav-item"><Link to="/admin">Link</Link></li>
-          <li className="nav-item"><Link to="/admin">Link</Link></li>
+          <li className="nav-item"><Link to="/admin/import">Import</Link></li>
+          <li className="nav-item"><Link to="/admin/export">Export</Link></li>
         </ul>
       </ContentWrapper>
     </nav>

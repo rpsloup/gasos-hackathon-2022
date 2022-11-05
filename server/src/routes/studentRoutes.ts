@@ -28,6 +28,16 @@ studentRouter.get('/student', async (_, res) => {
   }
 });
 
+studentRouter.get('/student_raw', async (_, res) => {
+  try {
+    const students = await pool.query('SELECT * FROM Students');
+    res.json(students?.rows as Technology[] ?? []);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json('Error!');
+  }
+});
+
 studentRouter.post('/student', async (req, res) => {
   try {
     const {
