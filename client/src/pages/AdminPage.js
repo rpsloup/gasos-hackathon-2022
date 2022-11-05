@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import PageNavigation from '../components/PageNavigation';
 import ContentWrapper from '../components/ContentWrapper';
 import Loader from '../components/Loader';
+import Collection from '../components/Collection';
 import StudentBox from '../components/StudentBox';
 
 import '../styles/reset.scss';
@@ -32,11 +33,13 @@ const AdminPage = () => {
         </ul>
         <h2>Studenti</h2>
         {studentsLoading ? <Loader /> : null}
-        {students && students.length > 0 ? students.map(
-          student => (
-            <StudentBox key={student.student_id} student={student} />
-          )
-        ) : null}
+        <Collection>
+          {students && students.length > 0 ? students.map(
+            student => (
+              <StudentBox key={student.student_id} student={student} />
+            )
+          ) : null}
+        </Collection>
       </ContentWrapper>
     </>
   );
