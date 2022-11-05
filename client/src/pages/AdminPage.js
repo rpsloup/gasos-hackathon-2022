@@ -35,6 +35,8 @@ const AdminPage = () => {
           <Card icon={<Icon name="paper-plane" type="fas" />} text="Rozeslat emaily" handler={() => navigate('/admin/email')} />
           <Card icon={<Icon name="file-import" type="fas" />} text="Import studentů" handler={() => navigate('/admin/import')} />
           <Card icon={<Icon name="file-export" type="fas" />} text="Export studentů" handler={() => navigate('/admin/export')} />
+          <Card icon={<Icon name="file-excel" type="fas" />} text="Import z Google Sheets" handler={() => navigate('/admin/sheets')} />
+          <Card icon={<Icon name="magnifying-glass" type="fas" />} text="Hledání studentů" handler={() => navigate('/admin/search')} />
         </Collection>
         {studentsLoading ? <Loader /> : null}
         <Collection>
