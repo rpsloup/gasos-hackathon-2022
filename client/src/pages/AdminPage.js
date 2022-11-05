@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 
 import PageNavigation from '../components/PageNavigation';
 import ContentWrapper from '../components/ContentWrapper';
-import Loader from '../components/Loader';
 import Collection from '../components/Collection';
+import Card from '../components/Card';
+import Icon from '../components/Icon';
+import Loader from '../components/Loader';
 import StudentBox from '../components/StudentBox';
 
 import '../styles/reset.scss';
@@ -31,6 +33,13 @@ const AdminPage = () => {
         <ul>
           <li><Link to="/admin/email">Zaslat emaily</Link></li>
         </ul>
+        <Collection>
+          <Card icon={<Icon name="paper-plane" type="fas" />} text="Card Text" />
+          <Card icon={<Icon name="paper-plane" type="fas" />} text="Card Text" />
+          <Card icon={<Icon name="paper-plane" type="fas" />} text="Card Text" />
+          <Card icon={<Icon name="paper-plane" type="fas" />} text="Card Text" />
+          <Card icon={<Icon name="paper-plane" type="fas" />} text="Card Text" />
+        </Collection>
         <h2>Studenti</h2>
         {studentsLoading ? <Loader /> : null}
         <Collection>
