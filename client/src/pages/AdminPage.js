@@ -11,6 +11,7 @@ import StudentBox from '../components/StudentBox';
 
 import '../styles/reset.scss';
 import '../styles/main.scss';
+import '../styles/admin.scss';
 
 const AdminPage = () => {
   const [students, setStudents] = useState([]);
@@ -30,13 +31,11 @@ const AdminPage = () => {
     <>
       <PageNavigation />
       <ContentWrapper>
-        <h1>Administrace</h1>
         <Collection columnSize="18rem">
           <Card icon={<Icon name="paper-plane" type="fas" />} text="Rozeslat emaily" handler={() => navigate('/admin/email')} />
-          <Card icon={<Icon name="paper-plane" type="fas" />} text="Import studentů" handler={() => navigate('/admin/import')} />
-          <Card icon={<Icon name="paper-plane" type="fas" />} text="Export studentů" handler={() => navigate('/admin/export')} />
+          <Card icon={<Icon name="file-import" type="fas" />} text="Import studentů" handler={() => navigate('/admin/import')} />
+          <Card icon={<Icon name="file-export" type="fas" />} text="Export studentů" handler={() => navigate('/admin/export')} />
         </Collection>
-        <h2>Studenti</h2>
         {studentsLoading ? <Loader /> : null}
         <Collection>
           {students && students.length > 0 ? students.map(
