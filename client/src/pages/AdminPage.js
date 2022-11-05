@@ -1,7 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
+import PageNavigation from '../components/PageNavigation';
+import ContentWrapper from '../components/ContentWrapper';
+import Collection from '../components/Collection';
+import Card from '../components/Card';
+import Icon from '../components/Icon';
 import Loader from '../components/Loader';
+import StudentBox from '../components/StudentBox';
 
 import '../styles/reset.scss';
 import '../styles/main.scss';
@@ -9,6 +15,7 @@ import '../styles/main.scss';
 const AdminPage = () => {
   const [students, setStudents] = useState([]);
   const [studentsLoading, setStudentsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('http://192.168.43.201:3001/student')
@@ -21,35 +28,27 @@ const AdminPage = () => {
 
   return (
     <>
-      <h1>Administrace</h1>
-      <ul>
-        <li><Link to="/admin/email">Zaslat emaily</Link></li>
-      </ul>
-      <h2>Studenti</h2>
-      {studentsLoading ? <Loader /> : null}
-      {students && students.length > 0 ? students.map(
-        student => (
-          <div key={student.student_id}>
-            <h3>{student.name}</h3>
-            <p>Lokalita: {student.locality}</p>
-            <p>Škola: {student.school}</p>
-            <p>Rok ukočení studia: {student.end_year}</p>
-            <p>Souhlasil(a) s GDPR: {student.gdpr ? 'Ano' : 'Ne'}</p>
-            <h3>Programovací jazyky</h3>
-            <ul>
-              {student.languages.map(language => (
-                <li key={language.language_id}>{language.name}</li>
-              ))}
-            </ul>
-            <h3>Technologie</h3>
-            <ul>
-              {student.technologies.map(technology => (
-                <li key={technology.technology_id}>{technology.name}</li>
-              ))}
-            </ul>
-          </div>
-        )
-      ) : null}
+      <PageNavigation />
+      <ContentWrapper>
+        <h1>Administrace</h1>
+        <ul>
+          <li><Link to="/admin/email">Zaslat emaily</Link></li>
+        </ul>
+        <Collection columnSize="18rem">
+          <Card icon={<Icon name="paper-plane" type="fas" />} text="Rozeslat emaily" handler={() => navigate('/admin/email')} />
+          <Card icon={<Icon name="paper-plane" type="fas" />} text="Import studentů" handler={() => navigate('/admin/import')} />
+          <Card icon={<Icon name="paper-plane" type="fas" />} text="Export studentů" handler={() => navigate('/admin/export')} />
+        </Collection>
+        <h2>Studenti</h2>
+        {studentsLoading ? <Loader /> : null}
+        <Collection>
+          {students && students.length > 0 ? students.map(
+            student => (
+              <StudentBox key={student.student_id} student={student} />
+            )
+          ) : null}
+        </Collection>
+      </ContentWrapper>
     </>
   );
 }
