@@ -12,7 +12,7 @@ studentRouter.get('/student', async (req, res) => {
   try {
     const { year } = req.query;
 
-    const students = await pool.query(`SELECT * FROM Students ${year ? `WHERE end_year = ${year}` : ''}`);
+    const students = await pool.query(`SELECT * FROM Students ${year ? `WHERE end_year = ${year}` : ''} ORDER BY student_id`);
     const fetchedLanguages = await pool.query('SELECT * FROM Languages');
     const fetchedTechnologies = await pool.query('SELECT * FROM Technologies');
     if (!students?.rows) res.send([]);

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import PageNavigation from '../components/PageNavigation';
+import Dialog from '../components/Dialog';
 import ContentWrapper from '../components/ContentWrapper';
 import Collection from '../components/Collection';
 import Card from '../components/Card';
@@ -29,6 +30,9 @@ const AdminPage = () => {
 
   return (
     <>
+      <Dialog title="Úprava záznamu studenta">
+        Sus.
+      </Dialog>
       <PageNavigation />
       <ContentWrapper>
         <Collection columnSize="18rem">

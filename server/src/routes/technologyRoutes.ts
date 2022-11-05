@@ -8,7 +8,7 @@ const technologyRouter = Router();
 
 technologyRouter.get('/technology', async (_, res) => {
   try {
-    const technologies = await pool.query('SELECT * FROM Technologies');
+    const technologies = await pool.query('SELECT * FROM Technologies ORDER BY name');
     res.json(technologies?.rows as Technology[] ?? []);
   } catch (error) {
     console.log(error);

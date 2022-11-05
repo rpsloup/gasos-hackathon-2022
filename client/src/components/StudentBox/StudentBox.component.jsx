@@ -18,6 +18,10 @@ const StudentBox = ({ student }) => {
     }
   }
 
+  const handleSendMail = () => {
+    fetch('http://192.168.43.201:3001/mail/all');
+  }
+
   return (
     <div className="student-box">
       <h3>{student.name}</h3>
@@ -40,7 +44,7 @@ const StudentBox = ({ student }) => {
       <div className="buttons">
         <Button text="Upravit" />
         <Button text="Odebrat" handler={() => handleDelete(student)} />
-        <Button text="Zaslat email" />
+        <Button text="Zaslat email" handler={() => handleSendMail()} />
       </div>
     </div>
   );
