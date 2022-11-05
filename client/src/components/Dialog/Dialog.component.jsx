@@ -16,8 +16,8 @@ const Dialog = ({ title, shown, closeHandler, children }) =>
           {children}
         </div>
         <div className="dialog-footer">
-          <Button text="Zavřít" />
-          <Button handler={closeHandler ?? undefined} text="Pokračovat" variant="primary" />
+          <Button handler={closeHandler ? () => closeHandler() : undefined} text="Zavřít" />
+          <Button text="Pokračovat" variant="primary" />
         </div>
       </div>
     </div>
