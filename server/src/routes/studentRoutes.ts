@@ -8,9 +8,11 @@ import type { Technology } from '../../../typings/technologyTypes';
 
 const studentRouter = Router();
 
-studentRouter.get('/student', async (_, res) => {
+studentRouter.get('/student', async (req, res) => {
   try {
-    const students = await pool.query('SELECT * FROM Students');
+    const { year } = req.query;
+
+    const students = await pool.query(`SELECT * FROM Students ${year ? `WHERE end_year = ${year}` : ''}`);
     const fetchedLanguages = await pool.query('SELECT * FROM Languages');
     const fetchedTechnologies = await pool.query('SELECT * FROM Technologies');
     if (!students?.rows) res.send([]);

@@ -39,8 +39,9 @@ const StudentBox = ({ student }) => {
         <Icon name="graduation-cap" type="fas" />
         <span>{student.end_year}</span>
       </div>
-      <button>Edit</button>
-      <button onClick={() => handleDelete(student)}>Remove</button>
+      <button>Upravit</button>
+      <button onClick={() => handleDelete(student)}>Odebrat</button>
+      <button>Zaslat email</button>
     </div>
   );
 }
