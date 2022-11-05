@@ -16,6 +16,10 @@ import '../styles/admin.scss';
 
 const AdminPage = () => {
   const [students, setStudents] = useState([]);
+  const [languages, setLanguages] = useState([]);
+  const [activeLanguages, setActiveLanguages] = useState([]);
+  const [technologies, setTechnologies] = useState([]);
+  const [activeTechnologies, setActiveTechnologies] = useState([]);
   const [studentsLoading, setStudentsLoading] = useState(true);
   const [editDialogShown, setEditDialogShown] = useState(false);
   const [currentStudent, setCurrentStudent] = useState(null);
@@ -29,18 +33,6 @@ const AdminPage = () => {
   const handleOpenEdit = student => {
     setEditDialogShown(true);
     setCurrentStudent(student);
-    console.log(newStudentNameRef.current.value);
-
-    if (
-      !newStudentNameRef?.current?.value ||
-      !newEmailRef.current?.value ||
-      !newLocalityRef.current?.value ||
-      !newSchoolRef.current?.value ||
-      !newEndYearRef.current?.value
-    ) return;
-
-    newStudentNameRef.current.value = student.name;
-    console.log(newStudentNameRef.current.value);
   }
 
   const handleEdit = () => {
@@ -72,6 +64,18 @@ const AdminPage = () => {
     window.location.reload();
   }
 
+  const toggleLanguageActive = (id) => {
+    activeLanguages.includes(id)
+      ? setActiveLanguages(activeLanguages.filter(language => language !== id))
+      : setActiveLanguages([...activeLanguages, id]);
+  }
+
+  const toggleTechnologyActive = (id) => {
+    activeTechnologies.includes(id)
+      ? setActiveTechnologies(activeTechnologies.filter(technology => technology !== id))
+      : setActiveTechnologies([...activeTechnologies, id]);
+  }
+
   useEffect(() => {
     fetch('http://192.168.43.201:3001/student')
       .then(res => res.json())
@@ -79,7 +83,22 @@ const AdminPage = () => {
         setStudents(data);
         setStudentsLoading(false);
       });
+
+    fetch('http://192.168.43.201:3001/language')
+      .then(res => res.json())
+      .then(data => setLanguages(data));
+
+    fetch('http://192.168.43.201:3001/technology')
+    .then(res => res.json())
+    .then(data => setTechnologies(data));
   }, []);
+
+  useEffect(() => {
+    currentStudent?.languages && setActiveLanguages(currentStudent.languages.map(language => language.language_id));
+  }, [currentStudent]);
+
+  console.log(activeLanguages);
+  console.log(languages);
 
   return (
     <>
@@ -93,11 +112,34 @@ const AdminPage = () => {
         confirmHandler={() => handleEdit()}
       >
         <form onSubmit={e => e.preventDefault()}>
+          <label htmlFor="name">Jméno</label>
           <input type="text" name="name" ref={newStudentNameRef} defaultValue={currentStudent?.name ?? ''} />
-          <input type="text" name="email" ref={newEmailRef} defaultValue={currentStudent?.email ?? ''}  />
-          <input type="text" name="locality" ref={newLocalityRef} defaultValue={currentStudent?.locality ?? ''}  />
-          <input type="text" name="school" ref={newSchoolRef} defaultValue={currentStudent?.school ?? ''}  />
-          <input type="text" name="endyear" ref={newEndYearRef} defaultValue={currentStudent?.end_year ?? ''}  />
+          <label htmlFor="email">Email</label>
+          <input type="text" name="email" ref={newEmailRef} defaultValue={currentStudent?.email ?? ''} />
+          <label htmlFor="locality">Bydliště</label>
+          <input type="text" name="locality" ref={newLocalityRef} defaultValue={currentStudent?.locality ?? ''} />
+          <label htmlFor="school">Škola</label>
+          <input type="text" name="school" ref={newSchoolRef} defaultValue={currentStudent?.school ?? ''} />
+          <label htmlFor="endyear">Ukončení studia</label>
+          <input type="text" name="endyear" ref={newEndYearRef} defaultValue={currentStudent?.end_year ?? ''} />
+          {languages.map(language => (
+            <div key={language.language_id}>
+              <input
+                type="checkbox"
+                defaultChecked={activeLanguages.includes(language.language_id)}
+                onChange={() => toggleLanguageActive(language.language_id)}
+              />
+              <label>{language.name}</label>
+            </div>
+          ))}
+          {technologies.map(technology => {
+            
+            return(
+            <div key={technology.technology_id}>
+              <input type="checkbox" onChange={() => toggleTechnologyActive(technology.technology_id)} />
+              <label>{technology.name}</label>
+            </div>
+          )})}
         </form>
       </Dialog>
       <PageNavigation />
